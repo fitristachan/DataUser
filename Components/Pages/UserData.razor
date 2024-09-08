@@ -1,0 +1,47 @@
+﻿@page "/userdata"
+@rendermode InteractiveServer
+@using DataUser.Components.Model
+
+<PageTitle>User Data</PageTitle>
+
+<h1>User Data</h1>
+
+<button class="btn btn-primary" @onclick="TambahTabel">Add</button>
+<br>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nama Lengkap</th>
+        <th>Nomor Telepon</th>
+        <th>Alamat</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+<tbody>
+    @foreach (var dataDiri in ListDataDiri)
+    {
+        <tr>
+            <td><input @bind=dataDiri.Nama placeholder="Masukkan nama Anda" class="form-control" /></td>
+            <td><input type="number" @bind=dataDiri.NoHp placeholder="Masukkan nomor telepon Anda" class="form-control"/></td>
+            <td><input @bind=dataDiri.Alamat placeholder="Masukkan alamat Anda" class="form-control"/></td>
+            <td><button class="btn btn-danger" @onclick = "() => HapusTabel(dataDiri)">Delete</button></td>
+        </tr>
+    }
+</tbody>
+</table>
+
+@code {
+    //inisiasi list data diri
+    private List<DataDiri> ListDataDiri = new List<DataDiri>();
+
+    //inisiasi add tabel
+    private void TambahTabel()
+    {
+        ListDataDiri.Add(new DataDiri());
+    }
+    //inisiasi remove tabel
+    private void HapusTabel(DataDiri dataDiri)
+    {
+        ListDataDiri.Remove(dataDiri);
+    }
+}
